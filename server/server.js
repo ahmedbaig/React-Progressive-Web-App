@@ -1,3 +1,5 @@
+// Disabled because of no use and closed ports to mongo
+
 const bodyParser = require('body-parser');
 const express = require('express');
 const cors = require('cors');
@@ -7,7 +9,7 @@ const path = require('path');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
-const mongoose = require('mongoose'); 
+const mongoose = require('mongoose');
 const config = require('../config/config');
 const webpackConfig = require('../webpack.config');
 
@@ -19,10 +21,8 @@ const port  = process.env.PORT || 3017;
 // ================================================================================================
 
 // Set up Mongoose
-mongoose.connect(config.db, {
-  useMongoClient: true,
-});
-mongoose.Promise = global.Promise;
+// mongoose.connect(config.db);
+// mongoose.Promise = global.Promise;
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));

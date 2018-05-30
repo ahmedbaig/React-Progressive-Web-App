@@ -1,42 +1,24 @@
-import React, { Fragment } from 'react';
+import React, {Fragment} from 'react';
 import { render } from 'react-dom';
-import MyProvider, { MyContext } from './provider/provider'
+
 import {
   BrowserRouter as Router,
   Route,
   Link,
-  Switch,
-  Redirect,
-  withRouter
+  Switch
 } from 'react-router-dom'
 
-import Login from './components/login'
-import Account from './components/account'
-import NotFound from './components/NotFound'
 
-import { setInStorage, getFromStorage, removeInStorage } from './utils/storage'
+import register from './registerServiceWorker';
 
-const PrivateRoute = ( {component: Component, ...rest} ) => (
-  <Route {...rest} render={ (props) =>  (
-        <MyContext.Consumer>
-          {(context) => (
-            context.state.auth === true
-            ? <Component {...props}/>
-            : <Redirect to={{
-                pathname: '/'
-              }}/>
-          )}
-        </MyContext.Consumer>
-      )
-    }
-  />
-)
+import App from './components/app'
+import NotFound from './components/notfound'
 
 render((
   <Router>
-    <MyProvider>
-      <Route exact path='/' component={Login}/>
-      <PrivateRoute path='/Account' component={Account}/>
-    </MyProvider>
+    <Switch>
+      <Route exact path="/" component={App}/>
+    </Switch>
   </Router>
 ), document.getElementById('app'));
+register();
